@@ -27,7 +27,6 @@ h2 { font-size: 6vw; color: white; }
   min-height: 60px;
 }
 
-/* Buttons */
 button {
   padding: 12px 20px;
   margin: 10px;
@@ -40,18 +39,6 @@ button {
 #yes { background: #4CAF50; color: white; }
 #no { background: #f44336; color: white; position: absolute; }
 
-/* Music button */
-.music-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: black;
-  color: white;
-  border-radius: 50%;
-  padding: 12px;
-}
-
-/* Desktop */
 @media (min-width: 600px) {
   h1 { font-size: 40px; }
   h2 { font-size: 28px; }
@@ -59,7 +46,6 @@ button {
   button { font-size: 18px; }
 }
 
-/* Hearts */
 .heart {
   position: absolute;
   background: rgba(255, 0, 85, 0.9);
@@ -82,21 +68,18 @@ button {
 <div class="container">
   <h1>Shrutiiii 🐼 ❤️</h1>
   <p id="typingText"></p>
-
   <h2>Will you forgive me?</h2>
 
   <button id="yes" onclick="startLove()">Yes ❤️</button>
   <button id="no" onclick="moveNo()">No 😜</button>
 </div>
-<!-- 🎵 Background Song -->
-  <audio id="bgMusic" autoplay loop>
-  <source src="kitab.mp3" type="audio/mpeg">
-</audio>
-<script>
-document.body.addEventListener("click", function () {
-  document.getElementById("bgMusic").play();
-}, { once: true });
-</script>
+
+<!-- 🎁 Secret button -->
+<button onclick="secret()" 
+style="position:fixed;top:10px;right:10px;opacity:0.2;">
+🎁
+</button>
+
 <script>
 // Typing effect
 const text = "Shrutiiii 🐼... I am really sorry 😔 I love you more than anything ❤️ Please forgive me 🥺";
@@ -111,23 +94,7 @@ function typeEffect() {
 }
 typeEffect();
 
-// Music
-const music = document.getElementById("bgMusic");
-
-// Mobile autoplay fix
-document.body.addEventListener("click", function () {
-  music.play();
-}, { once: true });
-
-function toggleMusic() {
-  if (music.paused) {
-    music.play();
-  } else {
-    music.pause();
-  }
-}
-
-// Hearts messages
+// Messages
 const messages = [
   "I love you Shrutiiii ❤️",
   "Sorry baby 🥺",
@@ -136,27 +103,64 @@ const messages = [
   "You are my everything 💖"
 ];
 
+// YES click
 function startLove() {
   document.body.innerHTML = "<h1 style='color:white;margin-top:40%;'>I LOVE YOU SHRUTIIII 🐼❤️🥰</h1>";
-  setInterval(createHeart, 300);
+
+  const msgs = ["I love you 💖","Sorry jaan 🥺","My panda 🐼","Forever us ❤️"];
+
+  setInterval(() => {
+    let msg = document.createElement("div");
+    msg.innerText = msgs[Math.floor(Math.random()*msgs.length)];
+    msg.style.position = "absolute";
+    msg.style.left = Math.random()*100 + "vw";
+    msg.style.top = "-20px";
+    msg.style.color = "white";
+    msg.style.fontSize = "20px";
+
+    document.body.appendChild(msg);
+
+    let fall = setInterval(()=>{
+      msg.style.top = (msg.offsetTop + 5) + "px";
+    },50);
+
+    setTimeout(()=>{
+      msg.remove();
+      clearInterval(fall);
+    },3000);
+
+  },300);
 }
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = messages[Math.floor(Math.random() * messages.length)];
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 6000);
-}
-
-// Move NO button
+// NO button upgrade 😜
+let scale = 1;
 function moveNo() {
+  let btn = document.getElementById("no");
+
   let x = Math.random() * (window.innerWidth - 100);
   let y = Math.random() * (window.innerHeight - 50);
-  document.getElementById("no").style.left = x + "px";
-  document.getElementById("no").style.top = y + "px";
+
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  scale -= 0.1;
+  btn.style.transform = "scale(" + scale + ")";
+  btn.innerText = "Pakad ke dikha 😜";
+}
+
+// 🎁 Secret Love Letter
+function secret(){
+  document.body.innerHTML = `
+  <div style="color:white;padding:30px;text-align:left;">
+    <h1>For You 🐼❤️</h1>
+    <p style="font-size:18px;line-height:1.6;">
+      I know I made mistakes... 😔<br><br>
+      But trust me, I never meant to hurt you.<br><br>
+      You are the best thing that ever happened to me 💖<br><br>
+      And I promise, I’ll do better… for us ❤️<br><br>
+      Please don’t stay mad… I really love you 🥺
+    </p>
+  </div>`;
 }
 </script>
 

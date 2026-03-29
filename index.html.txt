@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Shrutiiii ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  overflow: hidden;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 { font-size: 8vw; color: white; }
+h2 { font-size: 6vw; color: white; }
+
+#typingText {
+  font-size: 5vw;
+  color: white;
+  min-height: 60px;
+}
+
+/* Buttons */
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 4.5vw;
+  cursor: pointer;
+}
+
+#yes { background: #4CAF50; color: white; }
+#no { background: #f44336; color: white; position: absolute; }
+
+/* Music button */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  padding: 12px;
+}
+
+/* Desktop */
+@media (min-width: 600px) {
+  h1 { font-size: 40px; }
+  h2 { font-size: 28px; }
+  #typingText { font-size: 20px; }
+  button { font-size: 18px; }
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  background: rgba(255, 0, 85, 0.9);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Shrutiiii 🐼 ❤️</h1>
+  <p id="typingText"></p>
+
+  <h2>Will you forgive me?</h2>
+
+  <button id="yes" onclick="startLove()">Yes ❤️</button>
+  <button id="no" onclick="moveNo()">No 😜</button>
+</div>
+
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="YOUR_LINK_HERE.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<script>
+// Typing effect
+const text = "Shrutiiii 🐼... I am really sorry 😔 I love you more than anything ❤️ Please forgive me 🥺";
+let i = 0;
+
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typingText").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 50);
+  }
+}
+typeEffect();
+
+// Music
+const music = document.getElementById("bgMusic");
+
+// Mobile autoplay fix
+document.body.addEventListener("click", function () {
+  music.play();
+}, { once: true });
+
+function toggleMusic() {
+  if (music.paused) {
+    music.play();
+  } else {
+    music.pause();
+  }
+}
+
+// Hearts messages
+const messages = [
+  "I love you Shrutiiii ❤️",
+  "Sorry baby 🥺",
+  "My panda 🐼❤️",
+  "Please forgive me 😔",
+  "You are my everything 💖"
+];
+
+function startLove() {
+  document.body.innerHTML = "<h1 style='color:white;margin-top:40%;'>I LOVE YOU SHRUTIIII 🐼❤️🥰</h1>";
+  setInterval(createHeart, 300);
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = messages[Math.floor(Math.random() * messages.length)];
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+// Move NO button
+function moveNo() {
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
+  document.getElementById("no").style.left = x + "px";
+  document.getElementById("no").style.top = y + "px";
+}
+</script>
+
+</body>
+</html>

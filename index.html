@@ -88,8 +88,15 @@ button {
   <button id="yes" onclick="startLove()">Yes ❤️</button>
   <button id="no" onclick="moveNo()">No 😜</button>
 </div>
-
 <!-- 🎵 Background Song -->
+  <audio id="bgMusic" autoplay loop>
+  <source src="kitab.mp3" type="audio/mpeg">
+</audio>
+<script>
+document.body.addEventListener("click", function () {
+  document.getElementById("bgMusic").play();
+}, { once: true });
+</script>
 <iframe width="0" height="0"
 src="https://www.youtube.com/embed/LYl28zAk8eI?autoplay=1&loop=1&playlist=LYl28zAk8eI"
 frameborder="0"
